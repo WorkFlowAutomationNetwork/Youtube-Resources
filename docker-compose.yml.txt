@@ -1,4 +1,5 @@
-﻿services:
+
+services:
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n
@@ -6,11 +7,14 @@
     ports:
       - "5678:5678"
     volumes:
-      - ~/n8n-data:/home/node/n8n
+      - ./n8n-data:/home/node/.n8n #ensure the . is next to n8n at the end (delete this line if not needed)
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=raspberrypiusername
-      - N8N_BASIC_AUTH_PASSWORD=raspberrypipassword
+      - N8N_BASIC_AUTH_USER=testuser
+      - N8N_BASIC_AUTH_PASSWORD=DxdYU2GpRGee#@fXx4#
       - N8N_TELEMETRY_DISABLED=true
-      - N8N_HOST=raspberrypi IPaddress
+      - N8N_HOST=192.168.0.135
       - N8N_SECURE_COOKIE=false
+      - N8N_PROTOCOL=http
+
+
