@@ -1,0 +1,21 @@
+# rename to docker-compose.ymal and delete this line and anything in brackets
+services:
+  n8n:
+	image: n8nio/n8n:latest
+	container_name: n8n
+	restart: always
+	ports:
+  	- "5678:5678"
+	volumes:
+  	-  /home/testuser/n8n:/home/node/.n8n (ensure this matches your n8n folder location)
+	environment:
+  	- N8N_TELEMETRY_DISABLED=true
+  	- N8N_HOST=your raspberry PI IP address
+  	- N8N_PORT=5678
+  	- N8N_SECURE_COOKIE=false
+  	- N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+  	- DB_SQLITE_POOL_SIZE=1
+  	- N8N_RUNNERS_ENABLED=true
+  	- N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+  	- WEBHOOK_URL=your custom domain (with https://)
+  	- N8N_PROTOCOL=https
