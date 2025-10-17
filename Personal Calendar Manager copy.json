@@ -1,0 +1,999 @@
+{
+  "name": "Personal Calendar Manager copy",
+  "nodes": [
+    {
+      "parameters": {
+        "name": "emailAgent",
+        "description": "Call this tool for any email actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "9BiUjgSEq4NBZQaE",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/9BiUjgSEq4NBZQaE",
+          "cachedResultName": "Email Agent copy"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2256,
+        240
+      ],
+      "id": "f0b8df67-4d82-4db7-b9ee-693d847d6370",
+      "name": "Email Agent"
+    },
+    {
+      "parameters": {
+        "name": "contactAgent",
+        "description": "Call this tool for any contact related actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "nLywW1nVJNgm20nR",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/nLywW1nVJNgm20nR",
+          "cachedResultName": "Contact Agent copy"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2496,
+        224
+      ],
+      "id": "1d4ca363-1d6d-4e04-9939-79756758b316",
+      "name": "Contact Agent"
+    },
+    {
+      "parameters": {
+        "name": "calendarAgent",
+        "description": "Call this tool for any calendar action.",
+        "workflowId": {
+          "__rl": true,
+          "value": "MxETtqmncrAHEyHE",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/MxETtqmncrAHEyHE",
+          "cachedResultName": "Calendar Agent copy"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        2384,
+        240
+      ],
+      "id": "e10a6118-41f2-47ea-8b10-dd1848895cc9",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "content": "# Sub-Workflows\n",
+        "height": 200,
+        "width": 816,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2016,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "47d5bd7d-6df9-4f75-abaf-21e254aa0ee9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        2912,
+        272
+      ],
+      "id": "02da5e30-00cf-4871-ba24-7da270f8174a",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "content": "# Think\n",
+        "height": 200,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2832,
+        192
+      ],
+      "id": "b675e46f-2a23-4c3f-a9d2-e365d4447ded",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "a39dd525-1a6f-40ae-8394-5c73c137fde2",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        -32
+      ],
+      "webhookId": "4f03a324-270e-4dcf-b0c6-2836de24e15e",
+      "credentials": {
+        "telegramApi": {
+          "id": "4b612SJ0Vlith3DB",
+          "name": "PCCalendarManagerBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe7ecc99-e1e8-4a5e-bdd6-6fce9757b234",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3ea60e87-dd80-4ea5-a7fd-db5480f12676",
+      "name": "Set 'Text'",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "id": "3c25dc74-5311-4426-8788-612ca210ee31",
+      "name": "Download Voice File",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        992,
+        -176
+      ],
+      "webhookId": "b3a63fee-f34e-40d9-8ec5-64f6a572b111",
+      "credentials": {
+        "telegramApi": {
+          "id": "4b612SJ0Vlith3DB",
+          "name": "PCCalendarManagerBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "d2757f20-a364-486a-850e-1243cb204e66",
+      "name": "Transcribe Audio",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        1168,
+        -176
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "Fh59ltsa2zvIDwMH",
+          "name": "Workflow Automation Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Voice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8c844924-b2ed-48b0-935c-c66a8fd0c778",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "218f8975-fcd2-467a-890c-117710d421f4",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        832,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "df87be08-2bf4-4bb3-8b81-d0f688f12dae",
+      "name": "Response",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1840,
+        0
+      ],
+      "webhookId": "dbff7d7c-7dd2-4c47-9603-4c01f51c389c",
+      "credentials": {
+        "telegramApi": {
+          "id": "4b612SJ0Vlith3DB",
+          "name": "PCCalendarManagerBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1472,
+        176
+      ],
+      "id": "6e740207-4d65-4ea3-8ce8-1c81ce272b1c",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        816
+      ],
+      "id": "7e59efea-a6c1-48e1-8b4d-cf77bd290f96",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AyGviYRI7ZDvTbdM",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5190469491",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1856,
+        720
+      ],
+      "id": "6ae3a792-6aa6-4036-bc47-04fa686ef4b6",
+      "name": "Send Daily Update",
+      "webhookId": "8ea99d9a-11b0-4c77-b29f-4a0910a6b7ae",
+      "credentials": {
+        "telegramApi": {
+          "id": "4b612SJ0Vlith3DB",
+          "name": "PCCalendarManagerBot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "0AKgl6wr0xaqnbl7",
+          "mode": "list",
+          "cachedResultName": "YotubeBillsandExpenses",
+          "cachedResultUrl": "/projects/eNUnNiUjK4DJ86ls/datatables/0AKgl6wr0xaqnbl7"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.dataTableTool",
+      "typeVersion": 1,
+      "position": [
+        2672,
+        240
+      ],
+      "id": "dfe1dc6a-d19a-4d75-8592-16750fb11e67",
+      "name": "Get Bills data"
+    },
+    {
+      "parameters": {
+        "content": "# Daily Summary Agent",
+        "height": 576,
+        "width": 1360
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        608
+      ],
+      "typeVersion": 1,
+      "id": "8c45efc4-7c5c-49ac-a7ea-c64e5243882e",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 20
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        704,
+        976
+      ],
+      "id": "b3f31be4-97b5-4d38-9428-61ef684fb3dd",
+      "name": "Evening Trigger"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        720,
+        688
+      ],
+      "id": "61b52937-a372-4670-836b-029b2ad5baeb",
+      "name": "Morning Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Please provide a summary of all events happening today and direct debtted expenses happening for myself today ({{ $now }}) and for the rest of the week.",
+        "options": {
+          "systemMessage": "=You are a helpful assistant. Your job is to prepare a short, friendly daily summary message based on the user's Google Calendar and n8n data table data and the time of day.\n\nInstructions:\n\n1. Calendar Events:\n\n   - Retrieve all events from the user's Google Calendar that occur today ({{ $now }}) and for the rest of the current week, ending Sunday.\n   - For each event, include:\n     - Time (start time in 12-hour format)\n     - Event name\n     - Location (if available)\n   - Keep entries concise, e.g. \"2:30 PM – Team Meeting (Office Boardroom)\".\n\n2. Expenses:\n   - Retrieve all upcoming or due expenses from the Google Sheet between today and Sunday defined by {{ $now.endOf('week').set({ hour: 23, minute: 59, second: 0 }) }}.\n   - Include:\n     - Expense name\n     - Due date\n     - Amount (in $)\n   - Keep entries brief, e.g. \"Software Subscription – $49 due Friday - Bendigo Account\".\n\n3. Formatting & Tone:\n   - Output must be plain English text suitable for sending via Telegram (no markdown, emojis, or bullet points).\n   - Use clear, conversational language and short sentences.\n   - Start with a friendly greeting like \"Good morning! Here’s your update for the week.\"\n   - List events first, then expenses.\n   - End with a closing line like \"That’s all for now — have a great day ahead!\"\n   - Keep total output under 800 characters.\n   - If there are too many events or expenses, summarize with: \"You have more scheduled events and expenses this week — check your calendar and sheet for full details.\"\n\n4. Tools:\nyou have the following tools available to you which should be used as per below:\n- google calendar: Should be used to retrieve current events for the day and the week for Patrick\n- n8n data table: Should be used to retrive current and upcoming direct debts\n\n\nExample Output:\n\nMorning Trigger:\n\nGood morning! Here’s your update for the week.\n\nToday:\n9:00 AM – Client Call (Zoom)\n2:30 PM – Team Meeting (Office Boardroom)\n\nTomorrow:\n11:00 AM – Project Presentation (HQ)\n\nUpcoming Expenses:\nSoftware Subscription – $49 due Friday - Bendigo Account\nOffice Supplies – $120 due Sunday - ING Account\n\nThat’s all for now — have a great day ahead!\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        608
+      ],
+      "id": "41222fe4-5c74-4a59-9c2d-2c8c3cca7668",
+      "name": "Morning Message"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Please provide a summary of all events happening tomorrow and direct debtted expenses happening for myself today ({{ $now }}).",
+        "options": {
+          "systemMessage": "=You are a helpful assistant. Your job is to prepare a short, friendly daily summary message based on the user's Google Calendar and n8n data table data and the time of day.\n\nInstructions:\n\n1. Calendar Events:\n\n  - Retrieve all events from the user's Google Calendar that occur for tomorrow ( current time is {{ $now }}).\n   - For each event, include:\n     - Time (start time in 12-hour format)\n     - Event name\n     - Location (if available)\n   - Keep entries concise, e.g. \"2:30 PM – Team Meeting (Office Boardroom)\".\n\nExpenses:\n   - Retrieve all upcoming or due expenses from the Google Sheet for tomorrow (current time defined by {{ $now }}).\n   - Include:\n     - Expense name\n     - Due date\n     - Amount (in $)\n   - Keep entries brief, e.g. \"Software Subscription – $49 due Friday - Bendigo Account\".\n\n\n3. Formatting & Tone:\n   - Output must be plain English text suitable for sending via Telegram (no markdown, emojis, or bullet points).\n   - Use clear, conversational language and short sentences.\n   - Start with a friendly greeting like \"Good evening! Here’s your update for tomorrow.\"\n   - List events first, then expenses.\n   - End with a closing line like \"That’s all for now — have a great night!\"\n   - Keep total output under 800 characters.\n   - If there are too many events or expenses, summarize with: \"You have more scheduled events and expenses this week — check your calendar and sheet for full details.\"\n\n4. Tools:\nyou have the following tools available to you which should be used as per below:\n- google calendar: Should be used to retrieve current events for the day and the week for Patrick\n- n8n data table: Should be used to retrive current and upcoming direct debts\n\n\nExample Output:\n\nEvening Trigger:\n\nGood evening! Here's your update for tomorrow.\n\nTomorrow:\n9:00 AM – Client Call (Zoom)\n2:30 PM – Team Meeting (Office Boardroom)\n\nThat’s all for now — have a great night!"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        992
+      ],
+      "id": "08646466-a597-4294-bd39-4954d726cda2",
+      "name": "Evening Message"
+    },
+    {
+      "parameters": {
+        "content": "# Siri\n",
+        "height": 320,
+        "width": 1360,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "a763d736-ce46-4014-a24f-7fb101fe1a8b",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Telegram",
+        "height": 496,
+        "width": 1360,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "2a0518b7-f04e-42fa-a242-ffbf64b380a2",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "fb4c94c8-d6de-46b1-a6ff-5be02b65e656",
+      "name": "Respond to Apple Shortcut",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        1840,
+        368
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe7ecc99-e1e8-4a5e-bdd6-6fce9757b234",
+              "name": "siri",
+              "value": "={{ $json.body.input }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3d42bfc1-88cb-445d-9854-e67cfa419875",
+      "name": "Set 'Text' Siri",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1056,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "3f56bd1b-7c1a-4425-be06-f3f08dcfed51",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        368
+      ],
+      "id": "71e25e19-2715-4de3-abe9-a083588b1f91",
+      "name": "Siri",
+      "webhookId": "3f56bd1b-7c1a-4425-be06-f3f08dcfed51"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "0AKgl6wr0xaqnbl7",
+          "mode": "list",
+          "cachedResultName": "YotubeBillsandExpenses",
+          "cachedResultUrl": "/projects/eNUnNiUjK4DJ86ls/datatables/0AKgl6wr0xaqnbl7"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.dataTableTool",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        816
+      ],
+      "id": "0bb61a38-6f8e-40e3-80ea-a44b7b23d9fb",
+      "name": "Get Bills data1"
+    },
+    {
+      "parameters": {
+        "name": "calendarAgent",
+        "description": "Call this tool for any calendar action.",
+        "workflowId": {
+          "__rl": true,
+          "value": "MxETtqmncrAHEyHE",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/MxETtqmncrAHEyHE",
+          "cachedResultName": "Calendar Agent copy"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        816
+      ],
+      "id": "10c13c84-1c6c-48c0-84fe-ed3e9685f78f",
+      "name": "Calendar Agent1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.siri }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query  to the correct tool. You should never be writing emails, or creating even summaries, you just need to call the correct tool.\n\n## Tools\n- Think: Use this to think deeply or if you get stuck\n- emailAgent: Use this tool to take action in email\n- calendarAgent: Use this tool to take action in calendar\n- contactAgent: Use this tool to get, update, or add contacts\n\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n- Calendar requests may come in different formats such as \"create an event for today\" or \"create a reminder to do abc\"\n\n## Instructions\n1) Call the neccessary tools based on the user request\n2) Use the \"Think\" tool to verify you took the right steps. This tool should be called every time.\n\n\n## Examples\n1) \n- Input: send an email to nate herkelman asking him what time he wants to leave\n  - Action: Use contactAgent to get nate herkelman's email\n  - Action: Use emailAgent to send the email. You will pass the tool a query like \"send nate herkelman an email to ask what time he wants to leave. here is his email: [email address]\n- Output: The email has been sent to Nate Herkelman. Anything else I can help you with?\n- Input: Create a reminder to mow the lawn today at 12pm\n- Action: Use the Calendar Agent to create an event called Mow Lawn at 12pm \n\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1376,
+        368
+      ],
+      "id": "f92aa36e-61a2-4cf0-b74e-efc09e73898e",
+      "name": "Siri Assistant"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the ultimate personal assistant. Your job is to send the user's query  to the correct tool. You should never be writing emails, or creating even summaries, you just need to call the correct tool.\n\n## Tools\n- Think: Use this to think deeply or if you get stuck\n- emailAgent: Use this tool to take action in email\n- calendarAgent: Use this tool to take action in calendar\n- contactAgent: Use this tool to get, update, or add contacts\n\n\n## Rules\n- Some actions require you to look up contact information first. For the following actions, you must get contact information and send that to the agent who needs it:\n  - sending emails\n  - drafting emails\n  - creating calendar event with attendee\n- Calendar requests may come in different formats such as \"create an event for today\" or \"create a reminder to do abc\"\n\n## Instructions\n1) Call the neccessary tools based on the user request\n2) Use the \"Think\" tool to verify you took the right steps. This tool should be called every time.\n\n\n## Examples\n1) \n- Input: send an email to nate herkelman asking him what time he wants to leave\n  - Action: Use contactAgent to get nate herkelman's email\n  - Action: Use emailAgent to send the email. You will pass the tool a query like \"send nate herkelman an email to ask what time he wants to leave. here is his email: [email address]\n- Output: The email has been sent to Nate Herkelman. Anything else I can help you with?\n- Input: Create a reminder to mow the lawn today at 12pm\n- Action: Use the Calendar Agent to create an event called Mow Lawn at 12pm \n\n\n## Final Reminders\nHere is the current date/time: {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1408,
+        0
+      ],
+      "id": "727b6768-05e0-418b-b997-4783c1dcd0a7",
+      "name": "Telegram Assistant"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        192
+      ],
+      "id": "90c1829e-f79e-45e6-9114-7de1d6e554aa",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AyGviYRI7ZDvTbdM",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Email Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Siri Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contact Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Siri Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Siri Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Siri Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Voice File": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Download Voice File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set 'Text'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set 'Text'": {
+      "main": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Audio": {
+      "main": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Morning Message",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Evening Message",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Bills data": {
+      "ai_tool": [
+        [
+          {
+            "node": "Siri Assistant",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evening Trigger": {
+      "main": [
+        [
+          {
+            "node": "Evening Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Morning Trigger": {
+      "main": [
+        [
+          {
+            "node": "Morning Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Morning Message": {
+      "main": [
+        [
+          {
+            "node": "Send Daily Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evening Message": {
+      "main": [
+        [
+          {
+            "node": "Send Daily Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response": {
+      "main": [
+        []
+      ]
+    },
+    "Set 'Text' Siri": {
+      "main": [
+        [
+          {
+            "node": "Siri Assistant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Siri": {
+      "main": [
+        [
+          {
+            "node": "Set 'Text' Siri",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Evening Message",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Morning Message",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Bills data1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Evening Message",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Morning Message",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Siri Assistant": {
+      "main": [
+        [
+          {
+            "node": "Respond to Apple Shortcut",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Assistant": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Telegram Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Siri Assistant",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Daily Update": {
+      "main": [
+        []
+      ]
+    },
+    "Respond to Apple Shortcut": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Australia/Sydney",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "55b60929-ffa6-4e92-b96b-61a1d7e94be8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70cd10b9c4d3c1e2311fb8e22402a7d9f04133434f2c9abc3c14a93dd82cba1d"
+  },
+  "id": "wB7VeWzp84C0qUX9",
+  "tags": []
+}
