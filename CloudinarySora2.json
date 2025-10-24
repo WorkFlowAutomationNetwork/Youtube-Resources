@@ -1,0 +1,658 @@
+{
+  "name": "CloudinarySora2",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Image to Video - with prompt\n",
+        "height": 512,
+        "width": 2736,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        144,
+        368
+      ],
+      "id": "769e288a-91a4-43a2-b984-5c23f4b7c380",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are given the following inputs for video prompt generation:\n\nImage URL: {{ $('Set ID\\'s').item.json.image_url }}\nImage Description: {{ $json.content }}\nProduct Style: {{ $('Set ID\\'s').item.json.product_style }}\n\nUsing these inputs, create the final cinematic video prompt that aligns with your system instructions.\n\nOutput only the final prompt text — do not include explanations, labels, or markdown.\n",
+        "options": {
+          "systemMessage": "=# Role\nYou are an expert AI video prompt engineer trained to design optimized prompts for Sora 2 video generation.\n\n# Input Sources\n1. **Image URL:** {{ $('Set ID\\'s').item.json.image_url }}\n2. **Image Description:** {{ $json.content }}\n3. **Product Style (how they want it displayed)** {{ $('Set ID\\'s').item.json.product_style }}\n\n# Task\nUsing both the image (accessible via the URL) and the description provided, generate a highly detailed, realistic, and cinematic video prompt that visualizes this scene as a natural, high-quality video sequence. The prompt should also rely on how the user wants the product in the image displayed {{ $('Set ID\\'s').item.json.product_style }}\n\n# Instructions\nInterpret the image, description and style as a reference for visual tone, color, composition, and subject matter.  \nThen, describe the resulting video scene as if briefing a professional cinematography and VFX team.\n\nAlways include:\n\n1. **Main Subject(s):** Describe all visible people, their clothing, age, gender, facial expressions, actions, and movements.\n2. **Environment/Setting:** Specify the location, background details, weather, lighting, time of day, and overall mood.\n3. **Camera Style:** Describe the shot’s angle, framing, focal length, lens type, and any camera movement (e.g., dolly, handheld, tracking, aerial).\n4. **Lighting & Realism:** Include natural light behavior—reflections, shadows, ambient light, highlights, and realistic motion blur.\n5. **Tone & Atmosphere:** Convey the emotional or cinematic tone (e.g., peaceful morning, tense urban chase, romantic sunset).\n\n# Output Requirements\n- Write in fluent, natural English.\n- Avoid repetition or technical jargon.\n- The output should feel like a cohesive, vivid cinematic vision.\n- Do not include commentary, labels, or markdown — output **only** the final video prompt text.\n\n# Output\nA single, professional, cinematic video prompt based on the combined image and description.\nKeep it less than 150 words\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1136,
+        512
+      ],
+      "id": "5ec3b5c9-3865-4d27-aa66-1add85f33ea4",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        752
+      ],
+      "id": "01509425-504a-49f8-b707-b112a9eb9905",
+      "name": "GPT-5-mini1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AyGviYRI7ZDvTbdM",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "chatgpt-4o-latest",
+          "mode": "list",
+          "cachedResultName": "CHATGPT-4O-LATEST"
+        },
+        "text": "Provide a detailed description of everything visible in the image.\n\nInclude:\n- The number of people, their approximate ages, genders, and any visible facial expressions or poses.\n- Details of clothing: style, color, patterns, logos, and brand names if visible.\n- Any objects or products: identify their type, color, material, brand, or text labels.\n- Any readable text in the image (signs, logos, packaging, clothing prints, etc.).\n- The setting or background: describe the environment (e.g., indoors, outdoors, location type, lighting, atmosphere).\n- Any notable actions or interactions between people or objects.\n- Artistic or stylistic elements (camera angle, composition, color palette, etc.) if relevant.\n\nReturn the output as a structured, paragraph-style description that captures all visible elements clearly and factually, without interpretation or assumptions beyond what’s visible.\n",
+        "imageUrls": "={{ $json.image_url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        912,
+        512
+      ],
+      "id": "e9ad962a-94a4-47b1-8629-5939da481c7c",
+      "name": "Analyze image",
+      "credentials": {
+        "openAiApi": {
+          "id": "Fh59ltsa2zvIDwMH",
+          "name": "Workflow Automation Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5dddfcc6-0e7c-4972-be51-1b47a8ee9e89",
+              "name": "test",
+              "value": "={{ \"This is line one.\\nThis is line two.\\nThis is line three.\" }}",
+              "type": "string"
+            },
+            {
+              "id": "ef4b303a-e066-4477-a4a9-f4e6ffe59b1c",
+              "name": "test1",
+              "value": "\"pizza pizza\"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        1712
+      ],
+      "id": "1be3c44b-0094-48ed-a4f4-6b31c63da10f",
+      "name": "Bad"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "02ac4e8d-a5a1-46cf-8b3a-66a32450be95",
+              "name": "image_url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            },
+            {
+              "id": "6f93f723-de81-4edb-b446-cada42f8811b",
+              "name": "product_style",
+              "value": "={{ $('Submit Assets and Detail').item.json.Style }}",
+              "type": "string"
+            },
+            {
+              "id": "2030f33b-84fd-4e98-90e2-031e425daa5c",
+              "name": "aspect_ratio",
+              "value": "={{ $('Submit Assets and Detail').item.json['Aspect Ratio'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        688,
+        512
+      ],
+      "id": "fcd2e7dc-d275-4a99-87bb-6a4d94e081ba",
+      "name": "Set ID's"
+    },
+    {
+      "parameters": {
+        "formTitle": "Sora2 Automated",
+        "formDescription": "Sora2 Image to Video",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload Image",
+              "fieldType": "file",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Style",
+              "placeholder": "How do you want this product or video displayed eg influencer appearance, age, accent or detail on the scene and environment\n"
+            },
+            {
+              "fieldLabel": "Aspect Ratio",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "landscape"
+                  },
+                  {
+                    "option": "portrait"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        240,
+        512
+      ],
+      "id": "d862f67d-81f1-412d-96f8-1dac0baa04ba",
+      "name": "Submit Assets and Detail",
+      "webhookId": "668311d9-cb86-4881-959d-be2e92a0f140"
+    },
+    {
+      "parameters": {
+        "operation": "uploadFile",
+        "file": "Upload_Image",
+        "additionalFieldsFile": {
+          "folder": "Sora2"
+        }
+      },
+      "type": "n8n-nodes-cloudinary.cloudinary",
+      "typeVersion": 1,
+      "position": [
+        464,
+        512
+      ],
+      "id": "4dfbb9c0-09d9-4c33-aea9-ede2c8d54b89",
+      "name": "Upload Assets to Cloudinary",
+      "credentials": {
+        "cloudinaryApi": {
+          "id": "ESVhju85cmdMb2dx",
+          "name": "Cloudinary WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sora-2-image-to-video\",\n  \"callBackUrl\": \"{{$execution.resumeUrl}}\",\n  \"input\": {\n    \"prompt\": \"{{ $json.output.replace(/\\r?\\n|\\r/g, ' ').replace(/\"/g, '').replace(/[–—]/g, '-').replace(/\\s+/g, ' ').trim() }}\",\n    \"image_urls\": [\n      \"{{ $('Set ID\\'s').item.json.image_url }}\"\n    ],\n    \"aspect_ratio\": \"{{ $('Set ID\\'s').item.json.aspect_ratio }}\",\n    \"n_frames\": \"15\",\n    \"remove_watermark\": true\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1568,
+        512
+      ],
+      "id": "3914c15a-9ff1-40c1-89bf-16f72a03fd4b",
+      "name": "Image to Video Sora2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "JKlSzNuokgVcPqx1",
+          "name": "KIE AI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/jobs/recordInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $('Image to Video Sora2').item.json.data.taskId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2240,
+        512
+      ],
+      "id": "67573daf-5b35-47e6-858b-2c901b4e0a60",
+      "name": "Get Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "JKlSzNuokgVcPqx1",
+          "name": "KIE AI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cefb3a3b-6da9-419c-ba11-4dcbf84a1d40",
+              "name": "video_url",
+              "value": "={{ JSON.parse($json.data.resultJson).resultUrls[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2672,
+        480
+      ],
+      "id": "d01ba97d-d1ae-4daf-8d0a-031ad3b5e5b1",
+      "name": "Video URL"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8df82bec-d3d6-4644-95bd-dc7b9925bf65",
+              "leftValue": "={{ $json.msg }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1808,
+        512
+      ],
+      "id": "0dd4376b-bafb-49fd-bf77-8f9686e499ac",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "errorMessage": "=Error Message  {{ $('Image to Video Sora2').item.json.code }} {{ $('Image to Video Sora2').item.json.msg }}"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1952,
+        752
+      ],
+      "id": "e7f846bc-a03a-4df3-b132-c2e0fcc41346",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data.state }}",
+                    "rightValue": "success",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "29b747a9-9e7c-4129-8c0b-d39eaae179a0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Success"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2f32428c-0583-460e-8620-23afc4d55dd1",
+                    "leftValue": "={{ $json.data.state }}",
+                    "rightValue": "fail",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Error"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0223c0a9-2ee6-4b6d-88d8-f9130d378185",
+                    "leftValue": "={{ $json.data.state }}",
+                    "rightValue": "generating",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "generating"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        2464,
+        496
+      ],
+      "id": "27293638-ff53-4e51-b1f2-f26c2f9e2d90",
+      "name": "Switch",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2048,
+        512
+      ],
+      "id": "e371e2a9-54f6-47a6-8ad4-43ebe6f75bc4",
+      "name": "Wait",
+      "webhookId": "c89388ef-ec82-4932-a717-22b359d7a0ed",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b09352eb-481e-4fe7-b1a7-b5c4b7df0c1a",
+              "name": "test",
+              "value": "={{ $json.output.replace(/\\r?\\n|\\r/g, ' ').replace(/\"/g, '') }}",
+              "type": "string"
+            },
+            {
+              "id": "35f57de0-6c41-4566-89bb-bfd0170d0ed6",
+              "name": "test1",
+              "value": "={{ $json.test1.replace(/\"/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        1712
+      ],
+      "id": "7861f250-f48a-4469-9e4c-ecb229496311",
+      "name": "Clean up",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "###Auto Generate Videos with Sora2\n**Double click** to edit me. [Youtube Video Here] (link to youtube)\n\n [Github Template] (link to youtube)\n\n# Remixed by  \n[Workflow Automation Network](www.youtube.com/@WorkFlowAN)\n\n# Inspired by  \n**Author:** [Nate Herk](https://www.youtube.com/@nateherk)\n\nFollow the steps below to get this KIE.AI-powered workflow up and running in n8n:\n\n\n###  Get Your API Keys  \n\n[Cloudinary](https://console.cloudinary.com/) to get your project ID and API Key\n\n[kie.ai](https://kie.ai) to get your API key\n\n\n\n### Set Up Cloudflare and Kie.ai credentials  \nEnter Project ID, API and API Secrete into the **Cloudinary Node**\n\nEnter API key into the **HTTP Request** nodes that are calling [kie.ai](https://kie.ai).  \nCreate a **Generic Header Auth** where:  \n- **Name** = `Authorization`  \n- **Value** = `Bearer YOUR_API_KEY`  \n\n\n### Launch workflow and set prompt, aspect ration and save image to Cloudinary \n\n### Full video guide can be found on [This Video] (\n",
+        "height": 1072,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "ced9c547-ca2f-4dde-84dd-771030f46b34",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "GPT-5-mini1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Image to Video Sora2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bad": {
+      "main": [
+        []
+      ]
+    },
+    "Set ID's": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit Assets and Detail": {
+      "main": [
+        [
+          {
+            "node": "Upload Assets to Cloudinary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Assets to Cloudinary": {
+      "main": [
+        [
+          {
+            "node": "Set ID's",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image to Video Sora2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Video URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "62f5f656-4eda-45ff-810d-e8de56975990",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70cd10b9c4d3c1e2311fb8e22402a7d9f04133434f2c9abc3c14a93dd82cba1d"
+  },
+  "id": "k1xm8tXDxrQ8wYwh",
+  "tags": []
+}
