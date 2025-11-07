@@ -1,0 +1,145 @@
+{
+  "name": "LovableCustomFormResponse",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "21521178-ff6c-48fa-9137-fd18d7d380b9",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        32
+      ],
+      "id": "0faf6a9d-3279-403a-ac43-c1d5210b7f28",
+      "name": "Webhook",
+      "webhookId": "21521178-ff6c-48fa-9137-fd18d7d380b9"
+    },
+    {
+      "parameters": {
+        "jsCode": "const itemsOut = [];\n\nfor (const item of $input.all()) {\n  let body = item.json.body;\n\n  // Handle both stringified and already-parsed JSON\n  if (typeof body === 'string') {\n    try {\n      body = JSON.parse(body);\n    } catch (err) {\n      throw new Error(`Failed to parse JSON body: ${err.message}`);\n    }\n  }\n\n  // Validate\n  if (typeof body !== 'object' || body === null) {\n    throw new Error('Invalid body: expected a JSON object');\n  }\n\n  // Map the fields to output\n  itemsOut.push({\n    json: {\n      firstName: body['First Name'] || '',\n      lastName: body['Last Name'] || '',\n      email: body['Email'] || '',\n      address: body['Address'] || '',\n      city: body['City'] || '',\n      state: body['State'] || '',\n      postcode: body['Postcode'] || '',\n      country: body['Country'] || '',\n      phone: body['Contact Number'] || '',\n      service: body['Service Required'] || '',\n      preferredDate: body['Preferred Date'] || '',\n      preferredTime: body['Preferred Time'] || ''\n    }\n  });\n}\n\nreturn itemsOut;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        32
+      ],
+      "id": "13388ed7-9cce-4b98-8e5e-eb1fcc0b18cd",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        32
+      ],
+      "id": "f853ec73-4615-4433-bc0c-15cdbce57b93",
+      "name": "Wait",
+      "webhookId": "9c850bec-e763-487f-b81e-73636c648a9e"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "=Plumbcare Solutions - Service  {{ $json.service }}",
+        "emailType": "text",
+        "message": "=Hi {{ $json.firstName }}\n\nThank you for reaching out to Plumbcare Solutions in relation to {{ $json.service }}\nThis email is to confirm we have recieved your request and we will provide you with a quote within the next 24 hours. \n\nShould your request be an emergency please feel free to call us directly on xxxxxxxxx to request an immediate call out. \n\nThank you, \n\nDave\nPlumbcare Solutions ",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        256,
+        32
+      ],
+      "id": "2d7ba852-ff9f-47e8-a240-67f011b82507",
+      "name": "Send a message1",
+      "webhookId": "8a99d9dc-55c1-442c-9584-9625cbee23b2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nhUNF6lm0TfwQoQC",
+          "name": "PC Personal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        464,
+        32
+      ],
+      "id": "15dc7881-9887-45a0-96b1-68197859c09a",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1239f2e5-8624-4c52-a674-e7d2ddceb6d5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70cd10b9c4d3c1e2311fb8e22402a7d9f04133434f2c9abc3c14a93dd82cba1d"
+  },
+  "id": "TQw9yU5UvGkw4X0b",
+  "tags": []
+}

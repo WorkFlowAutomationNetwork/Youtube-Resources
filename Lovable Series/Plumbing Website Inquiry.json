@@ -1,0 +1,1336 @@
+{
+  "name": "Plumbing Website Inquiry",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "21521178-ff6c-48fa-9137-fd18d7d380b9",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        -96
+      ],
+      "id": "60b584da-76a8-4d26-b30e-108ad6c46262",
+      "name": "Webhook",
+      "webhookId": "21521178-ff6c-48fa-9137-fd18d7d380b9"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d84c3f09-7bf7-46bb-9de0-5efd2287f90d",
+              "leftValue": "={{ $json.duplicate }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1040,
+        -192
+      ],
+      "id": "40a438ec-b0fd-4476-9d67-c2f0f5c3d06f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2816,
+        -64
+      ],
+      "id": "b1c2c038-c29f-475e-96fa-11febcd45931",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU",
+          "mode": "list",
+          "cachedResultName": "Daves Client Contact List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Contact List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $json.firstName }}",
+            "Last Name": "={{ $json.lastName }}",
+            "Email": "={{ $json.email }}",
+            "Address": "={{ $json.address }}",
+            "Mobile": "={{ $json.phone }}",
+            "Postcode": "={{ $json.postcode }}",
+            "State": "={{ $json.state }}",
+            "City": "={{ $json.city }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mobile",
+              "displayName": "Mobile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Postcode",
+              "displayName": "Postcode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "State",
+              "displayName": "State",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1504,
+        -64
+      ],
+      "id": "61091160-e22e-46b7-929a-35dd4cf3417d",
+      "name": "Update Client List",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m3HD0kfDX0GXAzXu",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A",
+          "mode": "list",
+          "cachedResultName": "Daves Website INQ Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Website INQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Mobile": "={{ $json.phone.replace(/^0/, '+61') }}",
+            "First Name": "={{ $json.firstName }}",
+            "Last Name": "={{ $json.lastName }}",
+            "Email": "={{ $json.email }}",
+            "Address": "={{ $json.address }}",
+            "Service": "={{ $json.service }}",
+            "Preferred Date": "={{ $json.preferredDate }}",
+            "Preferred Time": "={{ $json.preferredTime }}",
+            "INQ Number": "={{ $json.inquiryNumber }}",
+            "Full Name": "={{ $json.firstName + ' ' + $json.lastName }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mobile",
+              "displayName": "Mobile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Preferred Date",
+              "displayName": "Preferred Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preferred Time",
+              "displayName": "Preferred Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "INQ Number",
+              "displayName": "INQ Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1712,
+        -256
+      ],
+      "id": "ab0cd808-dfa5-4a44-bd2c-7ac171c707df",
+      "name": "Update INQ Sheet",
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m3HD0kfDX0GXAzXu",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5190469491",
+        "text": "=You have a new Service Inquiry!\nFrom: {{ $('Wait1').item.json['Full Name'] }}, {{ $('Wait1').item.json.Email }}\nMessage: {{ $('Wait1').item.json.Service }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2400,
+        -432
+      ],
+      "id": "f8baba3c-e6ac-46c2-80e6-80a22398964e",
+      "name": "Send a text message",
+      "webhookId": "e01de6e3-4cdd-44b1-a1fb-0947af3063cc",
+      "credentials": {
+        "telegramApi": {
+          "id": "99zBy4ncYOls3QXa",
+          "name": "Dave Plumbing Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toRecipients": "={{ $json.Email }}",
+        "subject": "=Service Request {{ $json['INQ Number'] }}",
+        "bodyContent": "=Hi {{ $json['First Name'] }},\n\nThank you for reaching out to Plumbcare Solutions in relation to {{ $json.Service }}.\n\nThis email is to confirm we have recieved your request and we will provide you with a quote within the next 24 hours. \n\nShould your request be an emergency please feel free to call us directly on xxxxxxxxx to request an immediate call out. \n\nThank you, \n\nDave\nPlumbcare Solutions ",
+        "additionalFields": {
+          "bccRecipients": "workflowautomationnetwork@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2128,
+        128
+      ],
+      "id": "ab297fb0-ebdf-462f-98f7-d4ff779d38d3",
+      "name": "Send a message1",
+      "webhookId": "e1d92036-99e0-4503-a42d-2b3986bb21d9",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "vbnYPtIaBpjdog1K",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the incoming items\nconst itemsArray = items.map(item => item.json);\n\n// Find the first item that has a firstName or email (i.e., not empty)\nconst firstValid = itemsArray.find(i => i.firstName || i.email);\n\nif (!firstValid) {\n  // Return empty object if nothing valid\n  return [{ json: {} }];\n}\n\n// Return only the first valid item for Google Sheets\nreturn [\n  {\n    json: {\n      firstName: firstValid.firstName,\n      lastName: firstValid.lastName,\n      email: firstValid.email,\n      address: firstValid.address,\n      phone: firstValid.phone.replace(/^0/, '+61'), // convert leading 0 to +61\n      service: firstValid.service,\n      preferredDate: firstValid.preferredDate,\n      preferredTime: firstValid.preferredTime,\n      inquiryNumber: firstValid.inquiryNumber\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        -256
+      ],
+      "id": "2e4f3734-c163-41cb-830b-1ff6e3efe9d6",
+      "name": "Prep Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the incoming items\nconst itemsArray = items.map(item => item.json);\n\n// Find the first item that has a firstName or email (i.e., not empty)\nconst firstValid = itemsArray.find(i => i.firstName || i.email);\n\nif (!firstValid) {\n  // Return empty object if nothing valid\n  return [{ json: {} }];\n}\n\n// Safely format phone (convert leading 0 to +61)\nconst formattedPhone = firstValid.phone\n  ? firstValid.phone.replace(/^0/, '+61')\n  : '';\n\n// Return only the first valid item for Google Sheets\nreturn [\n  {\n    json: {\n      firstName: firstValid.firstName || '',\n      lastName: firstValid.lastName || '',\n      email: firstValid.email || '',\n      address: firstValid.address || '',\n      city: firstValid.city || '',\n      state: firstValid.state || '',\n      postcode: firstValid.postcode || '',\n      phone: formattedPhone,\n      service: firstValid.service || '',\n      preferredDate: firstValid.preferredDate || '',\n      preferredTime: firstValid.preferredTime || '',\n      inquiryNumber: firstValid.inquiryNumber || ''\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        -96
+      ],
+      "id": "f9ca65be-8892-411f-9efa-a7f5b5b24279",
+      "name": "Prep Data1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A",
+          "mode": "list",
+          "cachedResultName": "Daves Website INQ Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Website INQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Mobile": "={{ $('Prep Data1').item.json.phone }}",
+            "First Name": "={{ $('Prep Data1').item.json.firstName }}",
+            "Last Name": "={{ $('Prep Data1').item.json.lastName }}",
+            "Email": "={{ $('Prep Data1').item.json.email }}",
+            "Address": "={{ $('Prep Data1').item.json.address }}",
+            "Service": "={{ $('Prep Data1').item.json.service }}",
+            "Preferred Date": "={{ $('Prep Data1').item.json.preferredDate }}",
+            "Preferred Time": "={{ $('Prep Data1').item.json.preferredTime }}",
+            "INQ Number": "={{ $('Prep Data1').item.json.inquiryNumber }}",
+            "Full Name": "={{ $('Prep Data1').item.json.firstName + ' ' + $('Prep Data1').item.json.lastName }}",
+            "Postcode": "={{ $json.Postcode }}",
+            "State": "={{ $json.State }}",
+            "City": "={{ $json.City }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mobile",
+              "displayName": "Mobile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Postcode",
+              "displayName": "Postcode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "State",
+              "displayName": "State",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Preferred Date",
+              "displayName": "Preferred Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preferred Time",
+              "displayName": "Preferred Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "INQ Number",
+              "displayName": "INQ Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1712,
+        -64
+      ],
+      "id": "938cb1a7-6672-4b2c-8f35-3d31bd2f5a0b",
+      "name": "Update INQ Sheet1",
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m3HD0kfDX0GXAzXu",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2400,
+        -256
+      ],
+      "id": "792c2493-997a-43aa-b2f4-b198bb7a0954",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2000,
+        -256
+      ],
+      "id": "172c959f-9112-41ee-907c-693d64e0a8b4",
+      "name": "Wait1",
+      "webhookId": "2acafc48-ea53-4f32-8df4-88a278d19de6"
+    },
+    {
+      "parameters": {
+        "toRecipients": "={{ $json.Email }}",
+        "subject": "=Service Request {{ $json['INQ Number'] }}",
+        "bodyContent": "=Hi {{ $json['First Name'] }},\n\nThank you for reaching out to Plumbcare Solutions in relation to {{ $json.Service }}.\n\nThis email is to confirm we have recieved your request and we will provide you with a quote within the next 24 hours. \n\nShould your request be an emergency please feel free to call us directly on xxxxxxxxx to request an immediate call out. \n\nThank you, \n\nDave\nPlumbcare Solutions ",
+        "additionalFields": {
+          "bccRecipients": "workflowautomationnetwork@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        -368
+      ],
+      "id": "d0b37515-862a-4c7a-9b33-17f167db7d07",
+      "name": "Send a message2",
+      "webhookId": "e1d92036-99e0-4503-a42d-2b3986bb21d9",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "vbnYPtIaBpjdog1K",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5190469491",
+        "text": "=You have a new Service Inquiry!\nFrom: {{ $('Wait').item.json['Full Name'] }}, {{ $('Wait').item.json.Email }}\nMessage: {{ $('Wait').item.json.Service }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2816,
+        112
+      ],
+      "id": "8971c622-dc02-44f0-a194-e07af956d88a",
+      "name": "Send a text message1",
+      "webhookId": "e01de6e3-4cdd-44b1-a1fb-0947af3063cc",
+      "credentials": {
+        "telegramApi": {
+          "id": "99zBy4ncYOls3QXa",
+          "name": "Dave Plumbing Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## IF Current Client\nAdds and assigns INQ number and sends them an email a generic email with a INQ number that you can reference for quoting emails\nYou then receive a telegram notification that you have a new inquiry and they have been sent an email. Could Also go down the route of requesting permission",
+        "height": 368,
+        "width": 1344,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1248,
+        -464
+      ],
+      "typeVersion": 1,
+      "id": "b26d9ff3-5bd4-4005-85e0-715719de8661",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n## IF New\nAdds their details to your customer contact database and sends a generic email with a INQ number that you can reference for quoting emails",
+        "height": 320,
+        "width": 1344
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1248,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "f8916f4e-18ad-4bbd-986a-94381bb728bd",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU",
+          "mode": "list",
+          "cachedResultName": "Daves Client Contact List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Contact List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j19eyPrmF0m5X02BOZ9LdEmggGaTQxl4dEtEYzICiMU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        96,
+        64
+      ],
+      "id": "7a7f8a96-7950-46cc-baab-9a4fc5a553cc",
+      "name": "Get Current Contact Information1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m3HD0kfDX0GXAzXu",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Helper to extract inquiry number integer from string like \"INQ-000123\"\nfunction getInquiryNum(str) {\n  if (!str) return 0;\n  const match = str.match(/INQ-(\\d+)/);\n  return match ? parseInt(match[1], 10) : 0;\n}\n\n// Replace these with your actual existing rows (if used in production)\nconst existingInqRows = [];      // e.g., from INQ Google Sheet\nconst existingContactRows = [];  // e.g., from Contacts Google Sheet\n\n// --- STEP 1: Identify max inquiry number across all incoming data ---\nlet maxInquiryNum = 0;\nfor (const item of items) {\n  const json = item.json;\n  const inqNum = getInquiryNum(json['INQ Number']);\n  if (inqNum > maxInquiryNum) maxInquiryNum = inqNum;\n}\n\n// --- STEP 2: Collect existing emails from both sheets (if any) ---\nconst existingEmails = new Set([\n  ...existingInqRows.map(r => (r.Email || r.email || '').toLowerCase()),\n  ...existingContactRows.map(r => (r.Email || r.email || '').toLowerCase())\n]);\n\n// --- STEP 3: Grab first (new) incoming item ---\nconst firstItem = items[0].json;\nconst firstEmail = (firstItem.email || firstItem.Email || '').toLowerCase();\n\n// --- STEP 4: Collect all other incoming emails for duplicate check ---\nconst otherEmails = items\n  .slice(1)\n  .map(i => (i.json.email || i.json.Email || '').toLowerCase());\n\n// --- STEP 5: Determine if first item is duplicate ---\nconst existsInExisting = existingEmails.has(firstEmail);\nconst existsInIncoming = otherEmails.includes(firstEmail);\nconst isDuplicate = existsInExisting || existsInIncoming;\n\n// --- STEP 6: Assign the next sequential INQ number ---\nconst nextInquiryNum = maxInquiryNum + 1;\nconst inquiryNumber = `INQ-${nextInquiryNum.toString().padStart(6, '0')}`;\n\n// --- STEP 7: Return only the processed first item ---\nreturn [\n  {\n    json: {\n      firstName: firstItem.firstName || firstItem['First Name'] || '',\n      lastName: firstItem.lastName || firstItem['Last Name'] || '',\n      email: firstItem.email || firstItem['Email'] || '',\n      address: firstItem.address || firstItem['Address'] || '',\n      city: firstItem.city || firstItem['City'] || '',\n      state: firstItem.state || firstItem['State'] || '',\n      postcode: firstItem.postcode || firstItem['Postcode'] || '',\n      phone: firstItem.phone || firstItem['Mobile'] || firstItem['Number'] || firstItem['Contact Number'] || '',\n      service: firstItem.service || firstItem['Service'] || firstItem['Service Required'] || '',\n      preferredDate: firstItem.preferredDate || firstItem['Preferred Date'] || '',\n      preferredTime: firstItem.preferredTime || firstItem['Preferred Time'] || '',\n      duplicate: isDuplicate,\n      inquiryNumber\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        -192
+      ],
+      "id": "a1e1b766-1231-4826-8743-4226951ca165",
+      "name": "Filter current clients1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A",
+          "mode": "list",
+          "cachedResultName": "Daves Website INQ Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Website INQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_FQWq8ldimRP_yUaUW-KJK0u2leQ0lAvUGhxRbuRe4A/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        320,
+        -16
+      ],
+      "id": "c4cc81f3-f817-4874-afc9-3aaea6d5ec6d",
+      "name": "Get Current INQ numbers1",
+      "executeOnce": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "m3HD0kfDX0GXAzXu",
+          "name": "WFAN"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        544,
+        48
+      ],
+      "id": "03a7b4b9-e95f-42b9-9dfd-249792f9692d",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        -192
+      ],
+      "id": "465d1109-4022-4d1f-b38f-bdf7f53e3726",
+      "name": "Merge3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const itemsOut = [];\n\nfor (const item of $input.all()) {\n  let body = item.json.body;\n\n  // Handle both stringified and already-parsed JSON\n  if (typeof body === 'string') {\n    try {\n      body = JSON.parse(body);\n    } catch (err) {\n      throw new Error(`Failed to parse JSON body: ${err.message}`);\n    }\n  }\n\n  // Validate\n  if (typeof body !== 'object' || body === null) {\n    throw new Error('Invalid body: expected a JSON object');\n  }\n\n  // Map the fields to output\n  itemsOut.push({\n    json: {\n      firstName: body['First Name'] || '',\n      lastName: body['Last Name'] || '',\n      email: body['Email'] || '',\n      address: body['Address'] || '',\n      city: body['City'] || '',\n      state: body['State'] || '',\n      postcode: body['Postcode'] || '',\n      country: body['Country'] || '',\n      phone: body['Contact Number'] || '',\n      service: body['Service Required'] || '',\n      preferredDate: body['Preferred Date'] || '',\n      preferredTime: body['Preferred Time'] || ''\n    }\n  });\n}\n\nreturn itemsOut;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        -208
+      ],
+      "id": "7443d7d1-2a33-4851-816a-0e5350f2e188",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "content": "# Step 1 - copy\n## gets info from web submission. and checks if user is current or new",
+        "height": 544,
+        "width": 1328,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -352,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "ca545ebf-589d-408a-a843-5a02159a79de",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        -64
+      ],
+      "id": "72483c69-9703-47d1-be35-31783c3c24ae",
+      "name": "Wait",
+      "webhookId": "6d7893ea-4c2b-43b6-bffb-485f132f961c"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Service Request -  {{ $json['INQ Number'] }}",
+        "emailType": "text",
+        "message": "=Hi {{ $json['First Name'] }},  \n\nThank you for reaching out to Plumbcare Solutions in relation to {{ $json.Service }}.  \n\nThis email is to confirm we have recieved your request and we will provide you with a quote within the next 24 hours.   \n\nShould your request be an emergency please feel free to call us directly on xxxxxxxxx to request an immediate call out.   \n\nThank you,   \nDave Plumbcare Solutions ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2128,
+        -64
+      ],
+      "id": "593a29dc-fbf1-47d3-8de5-7722accf19c1",
+      "name": "Send a message",
+      "webhookId": "e9e8a384-ba89-4c88-bc20-347e24469f66",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nhUNF6lm0TfwQoQC",
+          "name": "PC Personal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Service Request -  {{ $json['INQ Number'] }}",
+        "emailType": "text",
+        "message": "=Hi {{ $json['First Name'] }},  \n\nThank you for reaching out to Plumbcare Solutions in relation to {{ $json.Service }}.  \n\nThis email is to confirm we have recieved your request and we will provide you with a quote within the next 24 hours.   \n\nShould your request be an emergency please feel free to call us directly on xxxxxxxxx to request an immediate call out.   \n\nThank you,   \nDave Plumbcare Solutions ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2192,
+        -224
+      ],
+      "id": "53b2e8a1-ba17-460c-989e-24f247dcef97",
+      "name": "Send a message3",
+      "webhookId": "e9e8a384-ba89-4c88-bc20-347e24469f66",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nhUNF6lm0TfwQoQC",
+          "name": "PC Personal"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.wfnn8n.org",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+            "content-length": "284",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "en-US,en;q=0.9",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "49.184.234.21",
+            "cf-ipcountry": "AU",
+            "cf-ray": "99a870da1c51fde2-SIN",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-warp-tag-id": "b99710c0-44d5-48b9-90c6-5b0a234c6b2e",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "origin": "https://id-preview--1811ca4d-b689-416e-a0dd-3610108520bb.lovable.app",
+            "priority": "u=1, i",
+            "referer": "https://id-preview--1811ca4d-b689-416e-a0dd-3610108520bb.lovable.app/",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Google Chrome\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "49.184.234.21",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "First Name": "rick",
+            "Last Name": "james",
+            "Email": "paddycam0007@gmail.com",
+            "Address": "123 Main street ",
+            "City": "Melbourne",
+            "State": "VIC",
+            "Postcode": "1234",
+            "Country": "Australia",
+            "Contact Number": "0412345678",
+            "Service Required": "Toilet seat needs replacing",
+            "Preferred Date": "2025-11-07",
+            "Preferred Time": "Morning"
+          },
+          "webhookUrl": "https://n8n.wfnn8n.org/webhook/21521178-ff6c-48fa-9137-fd18d7d380b9",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Code in JavaScript1": [
+      {
+        "json": {
+          "firstName": "rick",
+          "lastName": "james",
+          "email": "paddycam0007@gmail.com",
+          "address": "123 Main street ",
+          "city": "Melbourne",
+          "state": "VIC",
+          "postcode": "1234",
+          "country": "Australia",
+          "phone": "0412345678",
+          "service": "Toilet seat needs replacing",
+          "preferredDate": "2025-11-07",
+          "preferredTime": ""
+        }
+      }
+    ],
+    "Get Current Contact Information1": [
+      {
+        "json": {
+          "row_number": 2,
+          "First Name": "john",
+          "Last Name": "doe",
+          "Email": "johnd@gmail.com",
+          "Mobile": 12342123,
+          "Address": "4321 Main Street",
+          "Postcode": 4321,
+          "State": "VIC",
+          "City": "Melbourne"
+        }
+      }
+    ],
+    "Get Current INQ numbers1": [
+      {
+        "json": {
+          "row_number": 2,
+          "First Name": "John",
+          "Last Name": "Doe",
+          "Email": "123@gmail.com",
+          "Mobile": 12345678,
+          "Address": "123 Hope Street",
+          "Postcode": "",
+          "State": "",
+          "City": "",
+          "Service": "",
+          "Preferred Date": "1/11/25",
+          "Preferred Time": "Morning",
+          "Full Name": "John Doe",
+          "INQ Number": "INQ-000000"
+        }
+      }
+    ],
+    "Merge2": [
+      {
+        "json": {
+          "row_number": 2,
+          "First Name": "John",
+          "Last Name": "Doe",
+          "Email": "123@gmail.com",
+          "Mobile": 12345678,
+          "Address": "123 Hope Street",
+          "Postcode": "",
+          "State": "",
+          "City": "",
+          "Service": "",
+          "Preferred Date": "1/11/25",
+          "Preferred Time": "Morning",
+          "Full Name": "John Doe",
+          "INQ Number": "INQ-000000"
+        }
+      },
+      {
+        "json": {
+          "row_number": 2,
+          "First Name": "john",
+          "Last Name": "doe",
+          "Email": "johnd@gmail.com",
+          "Mobile": 12342123,
+          "Address": "4321 Main Street",
+          "Postcode": 4321,
+          "State": "VIC",
+          "City": "Melbourne"
+        }
+      }
+    ],
+    "Filter current clients1": [
+      {
+        "json": {
+          "firstName": "rick",
+          "lastName": "james",
+          "email": "paddycam0007@gmail.com",
+          "address": "123 Main street ",
+          "city": "Melbourne",
+          "state": "VIC",
+          "postcode": "1234",
+          "phone": "0412345678",
+          "service": "Toilet seat needs replacing",
+          "preferredDate": "2025-11-07",
+          "preferredTime": "",
+          "duplicate": false,
+          "inquiryNumber": "INQ-000001"
+        }
+      }
+    ],
+    "Update Client List": [
+      {
+        "json": {
+          "First Name": "rick",
+          "Last Name": "james",
+          "Email": "paddycam0007@gmail.com",
+          "Address": "123 Main street ",
+          "Mobile": "+61412345678",
+          "Postcode": "1234",
+          "State": "VIC",
+          "City": "Melbourne"
+        }
+      }
+    ],
+    "Update INQ Sheet1": [
+      {
+        "json": {
+          "Mobile": "+61412345678",
+          "First Name": "rick",
+          "Last Name": "james",
+          "Email": "paddycam0007@gmail.com",
+          "Address": "123 Main street ",
+          "Service": "Toilet seat needs replacing",
+          "Preferred Date": "2025-11-07",
+          "Preferred Time": "",
+          "INQ Number": "INQ-000001",
+          "Full Name": "rick james",
+          "Postcode": "1234",
+          "State": "VIC",
+          "City": "Melbourne"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Current Contact Information1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Prep Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prep Data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Client List": {
+      "main": [
+        [
+          {
+            "node": "Update INQ Sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update INQ Sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        []
+      ]
+    },
+    "Prep Data": {
+      "main": [
+        [
+          {
+            "node": "Update INQ Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Data1": {
+      "main": [
+        [
+          {
+            "node": "Update Client List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update INQ Sheet1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        []
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        []
+      ]
+    },
+    "Get Current Contact Information1": {
+      "main": [
+        [
+          {
+            "node": "Get Current INQ numbers1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Current INQ numbers1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge3": {
+      "main": [
+        [
+          {
+            "node": "Filter current clients1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Merge3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter current clients1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message3": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4bdc8c11-9dbc-448d-b690-06c624b861f8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70cd10b9c4d3c1e2311fb8e22402a7d9f04133434f2c9abc3c14a93dd82cba1d"
+  },
+  "id": "UQiH8cr5GK5GxAkE",
+  "tags": []
+}
